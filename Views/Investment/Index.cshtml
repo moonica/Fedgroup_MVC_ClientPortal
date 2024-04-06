@@ -1,0 +1,54 @@
+﻿@model List<ClientInvestment>;
+@{ViewData["Title"] = "Investments";}
+
+<div class="row">
+    <h2 class="col-md-6">@ViewData["Title"]</h2>
+
+    <!-- SEARCH -->
+    <div class="col-md-6">
+        <div class="searchBox">
+            <input type="text" id="investmentSearchTerm"/>
+            <button type="submit" class="btn btn-primary" onclick="Search('investmentSearchTerm', 'investmentTable')">
+                Search
+            </button>
+            <button type="reset" class="btn btn-light" onclick="ClearTableSearch('investmentSearchTerm', 'investmentTable')">X</button>
+        </div>
+    </div>
+    @* TODO: make this a reusable partial class *@
+    @* TODO: bind the submit button to the enter key pressed event (change to a form?) *@
+</div>
+
+<div class="row">
+    <!-- INVESTMENT LIST -->
+    <table class="listTable" id="investmentTable">
+        <tr>
+            @*<th>InvestmentID</th>*@
+            <th>Client</th>
+            <th>Type</th>
+            <th>Start Date</th>
+            <th>Invested Amount</th>
+            <th>Interest Rate (annual %)</th>
+            <th>Earnings forecast</th>
+        </tr>
+
+        @foreach (ClientInvestment inv in Model)
+        {
+            <tr>
+                @*<td>@inv.Investment.Id</td>*@
+                <td>@string.Format("{0} {1}", inv.Client.FirstName, inv.Client.LastName)</td>
+                <td>@Investment.GetInvestmentTypeName(inv.Investment.InvestmentType)</td>
+                <td>@inv.Investment.StartDate.ToString("yyyy-MM-dd")</td>
+                <td>@inv.Investment.InvestmentAmount.ToString("c")</td>
+                <td>@inv.Investment.InterestRate_Annual.ToString("p")</td>
+                <td>
+                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="@string.Format("#datePickerModal{0}", inv.Investment.Id)" onclick="ShowElement('@string.Format("datePickerModal{0}", inv.Investment.Id)')">Calculate</button>
+                    @* The bootstrap js is not triggering correctly so I've manually hidden and shown modals as a workaround' *@
+
+                    <partial name="_DateSelectorModal" model='new InvestmentViewModel(inv.Investment.Id)'>
+                    @* TODO: there must be a better way to do this, by rendering the modal only once but passing in the correct model on button click *@
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+

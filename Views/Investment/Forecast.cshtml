@@ -1,0 +1,37 @@
+﻿@model ForecastViewModel;
+@{
+    ViewData["Title"] = "Investment Forecast";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="row">
+    <table>
+        <tr>
+            <th>Start date:</th>
+            <td>@Model.StartDate.ToString("yyyy-MM-dd")</td>
+        </tr>
+        <tr>
+            <th>Principle investment amount:</th>
+            <td>@Model.InvestmentAmount.ToString("c")</td>
+        </tr>
+        <tr>
+            <th>Investment type:</th>
+            <td>@Model.InvestmentTypeName</td>
+        </tr>
+        <tr>
+            <th>Interest rate (annual %):</th>
+            <td>@Model.InterestRate_Annual.ToString("p")</td>
+        </tr>
+        <tr>
+            <th>Forecast (end) date:</th>
+            <td>@Model.EndDate.ToString("yyyy-MM-dd")</td>
+        </tr>
+        <tr>
+            <th>Forecast:</th>
+            <td><b>@Model.ForecastAmount?.ToString("c")</b></td>
+        </tr>
+    </table>
+    <button class="btn btn-secondary" onclick="history.back()">Back</button>
+    @* TODO: implement a better "back" functionality *@
+</div>

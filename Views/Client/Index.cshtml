@@ -1,0 +1,40 @@
+﻿@model List<Client>;
+@{
+    ViewData["Title"] = "Clients";
+}
+
+<div class="row">
+    <h2 class="col-md-6">@ViewData["Title"]</h2>
+
+    <!-- SEARCH -->
+    <div class="col-md-6">
+        <div class="searchBox">
+            <input type="text" id="clientSearchTerm" />
+            <button type="submit" class="btn btn-primary" onclick="Search('clientSearchTerm', 'clientTable')">
+                Search
+            </button>
+            <button type="reset" class="btn btn-light" onclick="ClearTableSearch('clientSearchTerm', 'clientTable')">X</button>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- CLIENT LIST -->
+    <table class="listTable" id="clientTable">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Investments</th>
+        </tr>
+
+        @foreach (Client client in Model)
+        {
+            <tr>
+                <td>@client.IdNumber</td>
+                <td>@string.Format("{0} {1}", client.FirstName, client.LastName)</td>
+                <td>@Html.ActionLink("Investments", "ClientInvestments", "Investment", new Dictionary<string, string>() { { "clientId", client.IdNumber } })</td>
+            </tr>
+        }
+    </table>
+</div>
+

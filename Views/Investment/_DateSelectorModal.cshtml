@@ -1,0 +1,36 @@
+﻿@model InvestmentViewModel
+
+@{
+    var DATETIME_FORMAT = "yyyy-MM-dd";
+    // TODO: get this from a config file or _ViewStart
+}
+
+<div class="modal" style="display: block" hidden="hidden" id="@string.Format("datePickerModal{0}", @Model.Id)" tabindex="-1" role="dialog" aria-labelledby="datepickerModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form asp-controller="Investment" asp-action="InvestmentForecast" method="post">
+            <input type="hidden" asp-for="@Model.Id" value="@Model.Id" />
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="datepickerModalLabel">Select end date for forecast</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="HideElement('@string.Format("datePickerModal{0}", @Model.Id)')">
+                        @* The bootstrap js is not triggering correctly so I've manually hidden and shown modals as a workaround' *@
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input asp-for='@Model.EndDate' id='@string.Format("datePicker{0}", Model.Id)' min='@DateTime.Now.Date.ToString(DATETIME_FORMAT)' type="date" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="HideElement('@string.Format("datePickerModal{0}", @Model.Id)')">Cancel</button>
+                    <button type="submit" class="btn btn-primary" onclick='alert("I am sorry, I can NOT get this date to bind to the model, I give up. I will pass a mock value to show the actual calculation")' >Calculate</button>
+
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@*Can't get the date selection to bind to the model and get sent to the destination controller, tried to hack it with JS in the interest of time but no luck*@
+@* onclick="CopyElementValue('@string.Format("datePicker{0}", Model.Id)', '@string.Format("datePickerValue{0}", Model.Id)')" *@

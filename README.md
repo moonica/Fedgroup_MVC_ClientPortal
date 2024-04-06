@@ -4,10 +4,10 @@ Take-home Technical Assessment for Fedgroup by Jonica Brown
 # How to use this app
 - Suggested: run in Visual Studio. Open the solution in Visual Studio on a computer with .NET 8.0 or later. Click on the green "run" button in the menu ribbon (select "http" or "IIS Express" if one is not already selected)
 - Installing the app: if the app can not be run in Visual Studio, follow the below guide to install it on the machine as a website and access it through Internet Information Services (IIS), but please note the following
- - The linked Microsoft documentation refers to .NET 3.5, you can ignore that as it's an older piece of documentation
- - You can ignore step 2 and onwards, step 1 should be sufficient
- - You can install .NET 8.0 if needed from Microsoft: https://dotnet.microsoft.com/en-us/download/dotnet/8.0
- - https://learn.microsoft.com/en-us/iis/application-frameworks/scenario-build-an-aspnet-website-on-iis/configuring-step-1-install-iis-and-asp-net-modules
+  - The linked Microsoft documentation refers to .NET 3.5, you can ignore that as it's an older piece of documentation
+  - You can ignore step 2 and onwards, step 1 should be sufficient
+  - You can install .NET 8.0 if needed from Microsoft: https://dotnet.microsoft.com/en-us/download/dotnet/8.0
+  - https://learn.microsoft.com/en-us/iis/application-frameworks/scenario-build-an-aspnet-website-on-iis/configuring-step-1-install-iis-and-asp-net-modules
 
 # Assumptions
 - Installation instructions assume a Windows environment, please refer to Microsoft documentation to run it in Linux or MacOS
